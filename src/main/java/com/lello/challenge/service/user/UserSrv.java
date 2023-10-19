@@ -40,7 +40,7 @@ public class UserSrv {
         try{
             UserModel userModel = userRepository.findById(id).orElse(null);
             if(userModel == null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.ofNullable(userModel));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.empty());
             }
 
             return ResponseEntity.status(HttpStatus.OK).body(Optional.of(userModel));
@@ -54,7 +54,7 @@ public class UserSrv {
         try{
             UserModel userModel = userRepository.findById(id).orElse(null);
             if(userModel == null){
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.ofNullable(userModel));
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Optional.empty());
             }
 
             EmailValidation.isValidEmailAddressRegex(userUpdateDto.getEmail());
