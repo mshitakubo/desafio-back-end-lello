@@ -7,17 +7,14 @@ public class UserDto {
 
     private UUID uuid;
 
-    @NotEmpty
     @NotNull
     @NotBlank
     private String name;
 
-    @NotEmpty
     @NotNull
     @NotBlank
     private String email;
 
-    @NotEmpty
     @NotNull
     @NotBlank
 //    @Size(max = 400, message = "A descrição não pode conter mais de 400 caracteres")
