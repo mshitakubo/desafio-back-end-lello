@@ -6,8 +6,8 @@ import org.jetbrains.annotations.NotNull;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Entity(name= "users")
-@Table(name = "users")
+@Entity
+@Table(name = "tb_users")
 public class UserModel {
 
     @Id
