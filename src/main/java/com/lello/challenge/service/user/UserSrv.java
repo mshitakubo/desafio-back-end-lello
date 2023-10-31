@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Service
 public class UserSrv {
@@ -21,14 +20,14 @@ public class UserSrv {
     @Autowired
     private UserRepository userRepository;
 
-    public ResponseEntity<Object> create(UserDto userDto) {
+    public ResponseEntity<UserModel> create(UserDto userDto) {
 
-            EmailValidation.isValidEmailAddressRegex(userDto.getEmail());
-            DescriptionValidation.isValidDescription(userDto.getDescription());
+        EmailValidation.isValidEmailAddressRegex(userDto.getEmail());
+        DescriptionValidation.isValidDescription(userDto.getDescription());
 
-            UserModel userModel =
-                        new UserModel(userDto.getName(), userDto.getEmail(),userDto.getDescription(), LocalDateTime.now(), null);
-            return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(userModel));
+        UserModel userModel =
+                new UserModel(userDto.getName(), userDto.getEmail(), userDto.getDescription(), LocalDateTime.now(), null);
+        return ResponseEntity.status(HttpStatus.CREATED).body(userRepository.save(userModel));
     }
 
     public UserModel findById(Long id) {
@@ -38,17 +37,17 @@ public class UserSrv {
 
     public UserModel update(Long id, UserUpdateDto userUpdateDto) {
 
-            UserModel userModel = findById(id);
-            EmailValidation.isValidEmailAddressRegex(userUpdateDto.getEmail());
+        UserModel userModel = findById(id);
+        EmailValidation.isValidEmailAddressRegex(userUpdateDto.getEmail());
 
-            UserModel usersModel =
-                    new UserModel(userModel.getId(),
-                            userUpdateDto.getName(),
-                            userUpdateDto.getEmail(),
-                            userModel.getDescription(),
-                            userModel.getCreatedAt(),
-                            LocalDateTime.now());
+        UserModel usersModel =
+                new UserModel(userModel.getId(),
+                        userUpdateDto.getName(),
+                        userUpdateDto.getEmail(),
+                        userModel.getDescription(),
+                        userModel.getCreatedAt(),
+                        LocalDateTime.now());
 
-            return userRepository.save(usersModel);
+        return userRepository.save(usersModel);
     }
 }

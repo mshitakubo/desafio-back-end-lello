@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("user")
@@ -20,7 +19,7 @@ public class UserController {
     private UserSrv userSrv;
 
     @PostMapping
-    public ResponseEntity<Object> create(@RequestBody @Valid UserDto userDto) {
+    public ResponseEntity<UserModel> create(@RequestBody @Valid UserDto userDto) {
         return userSrv.create(userDto);
     }
 
@@ -31,8 +30,8 @@ public class UserController {
     }
 
     @PutMapping(path = "/{id}")
-    public ResponseEntity<Object> updateById(@PathVariable(required = true) Long id,
-                                             @RequestBody UserUpdateDto userUpdateDto) {
+    public ResponseEntity<UserModel> updateById(@PathVariable(required = true) Long id,
+                                                @RequestBody UserUpdateDto userUpdateDto) {
         UserModel update = userSrv.update(id, userUpdateDto);
         return ResponseEntity.ok(update);
     }
