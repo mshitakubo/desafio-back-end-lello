@@ -25,14 +25,16 @@ public class UserController {
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<Optional<UserModel>> findById(@PathVariable(required = true) Long id) {
-        return userSrv.findById(id);
+    public ResponseEntity<UserModel> findById(@PathVariable(required = true) Long id) {
+        UserModel byId = userSrv.findById(id);
+        return ResponseEntity.ok(byId);
     }
 
     @PutMapping(path = "/{id}")
     public ResponseEntity<Object> updateById(@PathVariable(required = true) Long id,
                                              @RequestBody UserUpdateDto userUpdateDto) {
-        return userSrv.update(id, userUpdateDto);
+        UserModel update = userSrv.update(id, userUpdateDto);
+        return ResponseEntity.ok(update);
     }
 
 }

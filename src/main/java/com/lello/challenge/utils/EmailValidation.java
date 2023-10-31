@@ -1,11 +1,12 @@
 package com.lello.challenge.utils;
 
-import com.lello.challenge.model.exception.ApiException;
-import org.springframework.http.HttpStatus;
+import com.lello.challenge.service.user.exceptions.InvalidEmailException;
+import org.springframework.stereotype.Component;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+@Component
 public class EmailValidation {
 
     private EmailValidation() {
@@ -19,11 +20,11 @@ public class EmailValidation {
             Matcher matcher = pattern.matcher(email);
             if (matcher.matches()) {
                 isEmailValid = true;
-            }else {
-                throw new ApiException(HttpStatus.BAD_REQUEST, "E-mail inválido.");
+            } else {
+                throw new InvalidEmailException("E-mail inválido.");
             }
-        }else {
-            throw new ApiException(HttpStatus.BAD_REQUEST, "E-mail inválido.");
+        } else {
+            throw new InvalidEmailException("E-mail inválido.");
         }
         return isEmailValid;
     }

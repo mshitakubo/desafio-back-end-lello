@@ -1,6 +1,7 @@
 package com.lello.challenge.utils;
 
 import com.lello.challenge.model.exception.ApiException;
+import com.lello.challenge.service.user.exceptions.InvalidDescriptionException;
 import org.springframework.http.HttpStatus;
 
 public class DescriptionValidation {
@@ -12,7 +13,7 @@ public class DescriptionValidation {
         int descriptionLength = description.length();
 
         if(descriptionLength + 1 > 400){
-            throw new ApiException(HttpStatus.BAD_REQUEST, "A descrição não pode conter mais de 400 caracteres.");
+            throw new InvalidDescriptionException("A descrição não pode conter mais de 400 caracteres.");
         }else {
             descriptionIsValid = true;
         }
